@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>WebSocket Test</title>
+</head>
+<body>
+  <h2>WebSocket Live Logger</h2>
+  <button onclick="connect()">Connect</button>
+  <pre id="log"></pre>
+
+  <script>
+    function connect() {
+      const log = document.getElementById('log');
+      const ws = new WebSocket('ws://localhost:8080/ws-notifications/websocket');
+
+      ws.onopen = () => log.textContent += "Connected!\n";
+      ws.onmessage = (e) => log.textContent += "Message received: " + e.data + "\n";
+      ws.onerror = (e) => log.textContent += "Error occurred.\n";
+      ws.onclose = () => log.textContent += "Connection closed.\n";
+    }
+  </script>
+</body>
+</html>
