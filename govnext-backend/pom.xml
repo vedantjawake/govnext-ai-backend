@@ -56,6 +56,46 @@
     <artifactId>spring-boot-starter-validation</artifactId>
 </dependency>
 
+
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-security</artifactId>
+</dependency>
+<dependency>
+    <groupId>io.jsonwebtoken</groupId>
+    <artifactId>jjwt-api</artifactId>
+    <version>0.12.6</version>
+</dependency>
+<dependency>
+    <groupId>io.jsonwebtoken</groupIdSecuring your REST endpoints with Spring Security and JWT requires adding dependencies, configuring stateless authentication, and creating JWT generation and filter components.
+
+**1. Add Dependencies to `pom.xml`**
+
+Add Spring Security and the JJWT library inside your `<dependencies>` tag:
+
+```xml
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-security</artifactId>
+</dependency>
+<dependency>
+    <groupId>io.jsonwebtoken</groupId>
+    <artifactId>jjwt-api</artifactId>
+    <version>0.12.5</version>
+</dependency>
+<dependency>
+    <groupId>io.jsonwebtoken</groupId>
+    <artifactId>jjwt-impl</artifactId>
+    <version>0.12.5</version>
+    <scope>runtime</scope>
+</dependency>
+<dependency>
+    <groupId>io.jsonwebtoken</groupId>
+    <artifactId>jjwt-jackson</artifactId>
+    <version>0.12.5</version>
+    <scope>runtime</scope>
+</dependency>
+
         <!-- Required for spring.jpa.* and database integration -->
         <dependency>
             <groupId>org.springframework.boot</groupId>

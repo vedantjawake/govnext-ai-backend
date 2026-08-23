@@ -1,8 +1,10 @@
 package com.govnext.backend.controller;
 
+import com.govnext.backend.dto.UserDto;
 import com.govnext.backend.entity.User;
 import com.govnext.backend.exception.ResourceNotFoundException;
 import com.govnext.backend.repository.UserRepository;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -29,17 +31,18 @@ public class UserController {
     }
 
     @PostMapping
-    public User createUser(@RequestBody User user) {
+    public User createUser(@Valid @RequestBody UserDto userDto) {
+        User user = new User(userDto.getName(), userDto.getEmail());
         return userRepository.save(user);
     }
 
     @PutMapping("/{id}")
-    public User updateUser(@PathVariable Long id, @RequestBody User userDetails) {
+    public User updateUser(@PathVariable Long id, @Valid @RequestBody UserDto userDto) {
         User existingUser = userRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + id));
 
-        existingUser.setName(userDetails.getName());
-        existingUser.setEmail(userDetails.getEmail());
+        existingUser.setName(userDto.getName());
+        existingUser.setEmail(userDto.getEmail());
 
         return userRepository.save(existingUser);
     }
