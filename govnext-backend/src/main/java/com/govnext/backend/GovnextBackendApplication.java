@@ -9,5 +9,4 @@ public class GovnextBackendApplication {
     public static void main(String[] args) {
         SpringApplication.run(GovnextBackendApplication.class, args);
     }
-
 }
