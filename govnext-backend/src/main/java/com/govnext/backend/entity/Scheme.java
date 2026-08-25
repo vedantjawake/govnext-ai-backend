@@ -1,3 +1,4 @@
+
 package com.govnext.backend.entity;
 
 import jakarta.persistence.*;
