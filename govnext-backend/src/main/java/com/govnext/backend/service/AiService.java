@@ -1,25 +1,29 @@
 package com.govnext.backend.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestClient;
+import org.springframework.web.client.RestTemplate;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @Service
 public class AiService {
 
-    private final RestClient restClient;
+    @Autowired
+    private RestTemplate restTemplate;
 
-    public AiService(@Value("${ai.service.url}") String aiServiceUrl) {
-        this.restClient = RestClient.create(aiServiceUrl);
-    }
+    @Value("${ai.service.url:http://localhost:8000}")
+    private String aiServiceUrl;
 
-    public String fetchChatResponse(Object chatPayload) {
-        return restClient.post()
-                .uri("/routes/chat")
-                .contentType(MediaType.APPLICATION_JSON)
-                .body(chatPayload)
-                .retrieve()
-                .body(String.class);
+    public Map<String, Object> getAiChatResponse(String prompt) {
+        String url = aiServiceUrl + "/chat";
+        
+        Map<String, String> requestBody = new HashMap<>();
+        requestBody.put("prompt", prompt);
+
+        // Forward request to Python FastApi/Flask service
+        return restTemplate.postForObject(url, requestBody, Map.class);
     }
 }

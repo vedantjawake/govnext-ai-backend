@@ -1,5 +1,7 @@
 package com.govnext.backend.entity;
 
+import java.time.LocalDate;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -10,13 +12,23 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+@Enumerated(EnumType.STRING)
+private Role role = Role.USER;
+
     @Column(nullable = false)
     private String name;
 
     @Column(unique = true, nullable = false)
     private String email;
+private LocalDate dob;
 
-    private String password;
+private String state;
+
+private String category;
+
+private String experience;
+    @Column(nullable = false)
+private String password;
 
     public User() {}
 
