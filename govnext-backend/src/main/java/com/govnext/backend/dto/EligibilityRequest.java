@@ -13,6 +13,10 @@ public class EligibilityRequest {
     public String getGender() { return gender; }
     public String getState() { return state; }
 
+
+
+
+    
     // Setters
     public void setAge(Integer age) { this.age = age; }
     public void setAnnualIncome(Double annualIncome) { this.annualIncome = annualIncome; }
